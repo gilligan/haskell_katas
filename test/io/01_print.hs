@@ -1,3 +1,3 @@
 {- Print to the sreen: "hello, world" -}
 
-main ___
+main = putStrLn "hello, world"

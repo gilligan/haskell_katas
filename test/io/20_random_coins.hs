@@ -4,7 +4,11 @@
 import System.Random
 
 threeCoins :: StdGen -> (Bool, Bool, Bool)
-___
+threeCoins gen =
+    let (firstCoin, newGen) = random gen
+        (secondCoin, newGen') = random newGen
+        (thirdCoin, newGen'') = random newGen'
+    in (firstCoin, secondCoin, thirdCoin)
 
 main = do
     let (a,b,c) = threeCoins (mkStdGen 943)

@@ -1,8 +1,5 @@
 {-
     Read a non-existing file
-    The `toTry` should function as it did in the previous example
-    But the handler should use pattern matching
-        handle the `isDoesNotExistError` case
 -}
 
 import System.Environment
@@ -12,8 +9,13 @@ import Control.Exception (catch)
 
 main = toTry `catch` handler
 
-{- toTry :: IO () -}
-_____
+toTry :: IO ()
+toTry = do
+    (fileName:_) <- getArgs
+    contents <- readFile fileName
+    putStrLn $ "The file has " ++ show (length (lines contents)) ++ " lines!"
 
-{- handler :: IOError -> IO () -}
-_____
+handler :: IOError -> IO ()
+handler e
+    | isDoesNotExistError e = putStrLn "The file doesn't exist!"
+    | otherwise = ioError e

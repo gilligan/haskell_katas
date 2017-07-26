@@ -12,16 +12,20 @@ phoneBook =
     ]
 
 {- findKey :: (Eq k) => k -> [(k,v)] -> v -}
-{- Use this later -}
+{- findKey key xs = snd . head . filter (\(k,v) -> key == k) $ xs -}
 {- findKey :: (Eq k) => k -> [(k,v)] -> Maybe v -}
+{- findKey key [] = Nothing -}
+{- findKey key ((k,v):xs) = if key == k -}
+                            {- then Just v -}
+                            {- else findKey key xs -}
+
+findKey :: (Eq k) => k -> [(k,v)] -> Maybe v
+findKey key = foldr (\(k,v) acc -> if key == k then Just v else acc) Nothing
 
 main :: IO()
 main = hspec $ do
     describe "Map functionality" $ do
         it "can look up by keys" $ do
-            pending
-            {- Use this test for the happy-path -}
             {- findKey "bonnie" phoneBook `shouldBe` "452-2928" -}
-            {- Use these tests to test edge cases -}
-            {- findKey "bonnie" phoneBook `shouldBe` Just "452-2928" -}
-            {- findKey "bonn" phoneBook `shouldBe` Nothing -}
+            findKey "bonnie" phoneBook `shouldBe` Just "452-2928"
+            findKey "bonn" phoneBook `shouldBe` Nothing

@@ -2,29 +2,25 @@ import Test.Hspec
 import Test.QuickCheck
 import Control.Exception (evaluate)
 
-{- head' :: [a] -> a -}
-{- head' xs = case xs of ... -}
+head' :: [a] -> a
+head' xs = case xs of [] -> error "No head for empty lists!"
+                      (x:_) -> x
 
-{- describeList :: [a] -> String -}
-{- describeList xs = "The list is " ++ case xs ___ -}
-                                            {- ___ -}
-                                            {- ___ -}
-
-{- Case statement can be written with patten matching -}
-{- describeList xs = "The list is " ++ what xs -}
-    {- where ___ [] = "is empty." -}
-          {- ___ -}
-          {- ___ -}
-
+describeList :: [a] -> String
+{- describeList xs = "The list is " ++ case xs of [] -> "empty." -}
+                                               {- [x] -> "a singleton list." -}
+                                               {- xs -> "a longer list." -}
+describeList xs = "The list is " ++ what xs
+    where what [] = "empty."
+          what [x] = "a singleton list."
+          what xs = "a longer list."
 
 main :: IO()
 main = hspec $ do
     describe "Case expressions" $ do
         it "can be used anywhere" $ do
-            pending
-            {- head' [1,3] `shouldBe` 1 -}
+            head' [1,3] `shouldBe` 1
         it "can be even used in expressions" $ do
-            pending
-            {- describeList [] `shouldBe` "The list is empty." -}
-            {- describeList [1] `shouldBe` "The list is a singleton list." -}
-            {- describeList [1,2] `shouldBe` "The list is a longer list." -}
+            describeList [] `shouldBe` "The list is empty."
+            describeList [1] `shouldBe` "The list is a singleton list."
+            describeList [1,2] `shouldBe` "The list is a longer list."

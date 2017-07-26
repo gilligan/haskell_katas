@@ -1,16 +1,14 @@
 {-
     Get arguments from the command line
-    * getArgs will ge the arguments
-    * getProgName will get the - you know it
  -}
 
 import System.Environment
 import Data.List
 
 main = do
-    args <- ___
-    progName <- ___
+    args <- getArgs
+    progName <- getProgName
     putStrLn "The arguments are:"
-    mapM ___ ___
+    mapM putStrLn args
     putStr "The program name is: "
-    putStrLn ___
+    putStrLn progName

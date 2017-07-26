@@ -1,11 +1,10 @@
 {-
-    Reads a file and prints out its content
-    Use the file test/io/girlfriend.txt
+    Reads a file and points out its content
 -}
 import System.IO
 
 main = do
-    handle <- ___
-    contents <- ___
+    handle <- openFile "test/io/girlfriend.txt" ReadMode
+    contents <- hGetContents handle
     putStr contents
-    ___ handle
+    hClose handle

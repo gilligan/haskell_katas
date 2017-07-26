@@ -56,22 +56,19 @@ main :: IO()
 main = hspec $ do
     describe "Functor typeclass" $ do
         it "map is a functor" $ do
-            pending
-            {- ___ [1..3] `shouldBe` [2,4,6] -}
-            {- map ___ [1..3] `shouldBe` [2,4,6] -}
-            {- ___ (*3) [] `shouldBe` [] -}
+            fmap (*2) [1..3] `shouldBe` [2,4,6]
+            map (*2) [1..3] `shouldBe` [2,4,6]
+            fmap (*3) [] `shouldBe` []
         it "works with Maybe, as it's a functor" $ do
-            pending
-            {- fmap (++ " HEY GUYS") ___ -}
-                {- `shouldBe` Just "Something serious. HEY GUYS" -}
-            {- fmap (++ " HEY GUYS") ___ `shouldBe` Nothing -}
-            {- fmap (*2) ___ `shouldBe` Just 400 -}
-            {- fmap (*3) ___ `shouldBe` Nothing -}
+            fmap (++ " HEY GUYS") (Just "Something serious.")
+                `shouldBe` Just "Something serious. HEY GUYS"
+            fmap (++ " HEY GUYS") Nothing `shouldBe` Nothing
+            fmap (*2) (Just 200) `shouldBe` Just 400
+            fmap (*3) Nothing `shouldBe` Nothing
         it "works with our Tree type class" $ do
-            pending
-            {- let nums = [20,28,12] -}
-            {- let numsTree = foldr treeInsert EmptyTree nums -}
+            let nums = [20,28,12]
+            let numsTree = foldr treeInsert EmptyTree nums
 
-            {- fmap (*2) ___ `shouldBe` EmptyTree -}
-            {- fmap ___ (foldr treeInsert EmptyTree [5,7,3]) -}
-                {- `shouldBe` numsTree -}
+            fmap (*2) EmptyTree `shouldBe` EmptyTree
+            fmap (*4) (foldr treeInsert EmptyTree [5,7,3])
+                `shouldBe` numsTree

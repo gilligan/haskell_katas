@@ -1,7 +1,5 @@
 {-
     Computer guesses a number, user try to find it out
-    randomR (1,10) gen :: (Int, StdGen) will generate the number between 1 - 10
-        plus it returns the new Gen
 -}
 
 import System.Random
@@ -13,15 +11,15 @@ main = do
 
 askForNumber :: StdGen -> IO ()
 askForNumber gen = do
-    let (randNumber, newGen) = ___
+    let (randNumber, newGen) = randomR (1,10) gen :: (Int, StdGen)
     putStr "Which number in the range from 1 to 10 am I thinking of? "
     numberString <- getLine
-    when (___ $ ___ ___) $ do
-        let number = ___ ___
+    when (not $ null numberString) $ do
+        let number = read numberString
         if randNumber == number
            then putStrLn "You are correct!"
            else putStrLn $ "Sorry, it was " ++ show randNumber
-        ___ ___  {- Recur -}
+        askForNumber newGen
 
 {- Another way to do it just in the main function -}
 {-

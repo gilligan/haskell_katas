@@ -4,8 +4,14 @@
     3. Quit with <ENTER>
 -}
 
-{- reverseWords :: String -> String -}
+reverseWords :: String -> String
+reverseWords = unwords . map reverse . words
 
 main = do
     putStrLn "Type a word or two"
-    ___
+    line <- getLine
+    if null line
+        then return ()
+        else do
+            putStrLn $ reverseWords line
+            main

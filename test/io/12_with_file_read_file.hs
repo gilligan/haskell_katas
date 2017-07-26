@@ -1,8 +1,9 @@
 {-
-    withFile :: FilePath -> IOMode -> (Handle -> IO a) -> IO a
-    Display the file content from test/io/girlfriend.txt
+    withFile :: FilePath -> (Handle -> IO a) -> IO a
 -}
 import System.IO
 
 main = do
-    withFile ___
+    withFile "test/io/girlfriend.txt" ReadMode (\handle -> do
+        contents <- hGetContents handle
+        putStr contents)
