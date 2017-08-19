@@ -26,4 +26,10 @@ main = hspec $ do
         it "can use Last to find the last Just value" $ do
             (getLast . mconcat . map Last $ [Nothing, Just 9, Just 10])
                 `shouldBe` Just 10
-
+        it "can find the first and last matching value from a list" $ do
+            let interesting = [ 'a', 'b' ]
+            let q c = if c `elem` interesting then Just c else Nothing
+            q 'a' `shouldBe` Just 'a'
+            q 'c' `shouldBe` Nothing
+            getFirst (mconcat $ map (First . q) "cabinet") `shouldBe` Just 'a'
+            getLast (mconcat $ map (Last . q) "cabinet") `shouldBe` Just 'b'
