@@ -35,4 +35,8 @@ main = hspec $ do
                 `shouldBe` Just 3
             (Nothing `applyMaybe` \x -> if x > 2 then Just x else Nothing)
                 `shouldBe` Nothing
-
+        it "works like our applyMaybe fn" $ do
+            let value = return "WHAT" :: Maybe String
+            value `shouldBe` Just "WHAT"
+            (Just 9 >>= \x -> return (x*10)) `shouldBe` Just 90
+            (Nothing >>= \x -> return (x*10)) `shouldBe` Nothing
